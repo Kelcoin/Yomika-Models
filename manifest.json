@@ -1,0 +1,53 @@
+{
+  "tag": "models-v1",
+  "assets": [
+    {
+      "role": "inpainting",
+      "path": "deepcreampy/bar.onnx",
+      "downloadName": "deepcreampy--bar.onnx",
+      "size": 14646486,
+      "sha256": "ba32b5abe0303cd452c466516c2f88f3cbf0337b34867470dbdf4ffa6ec55b2a",
+      "companions": []
+    },
+    {
+      "role": "inpainting",
+      "path": "deepcreampy/mosaic.onnx",
+      "downloadName": "deepcreampy--mosaic.onnx",
+      "size": 14646626,
+      "sha256": "339503f625ad0aea902b5acd4adc491741e53235e47b6c4ddd77aa3cc1d351f2",
+      "companions": []
+    },
+    {
+      "role": "upscaler",
+      "path": "esrgan/4x-Fatal-Pixels.onnx",
+      "downloadName": "esrgan--4x-Fatal-Pixels.onnx",
+      "size": 2619467,
+      "sha256": "fd3713e36428ea82a915351c8031c829639e923923b3efe371c2d2e71b269b4d",
+      "companions": []
+    },
+    {
+      "role": "upscaler",
+      "path": "esrgan/4x-Fatal-Pixels.onnx.data",
+      "downloadName": "esrgan--4x-Fatal-Pixels.onnx.data",
+      "size": 66737664,
+      "sha256": "ca57e19a7490078298af8072d0d6ff800ccd96730f094684a6afa152fa0829aa",
+      "companions": []
+    },
+    {
+      "role": "detector",
+      "path": "mrcnn/weights.onnx",
+      "downloadName": "mrcnn--weights.onnx",
+      "size": 127470471,
+      "sha256": "3782f864daffc091ced5c00aed604810d233c74da9a428e3ac519a8a78dfc13b",
+      "companions": []
+    },
+    {
+      "role": "license",
+      "path": "LICENSE",
+      "downloadName": "Aletheia-Lens-LICENSE",
+      "size": 35823,
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "companions": []
+    }
+  ]
+}
