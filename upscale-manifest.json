@@ -1,0 +1,77 @@
+{
+  "tag": "models-v1",
+  "models": [
+    {
+      "id": "realesr-general-x4v3",
+      "label": "Real-ESRGAN 通用 x4",
+      "scale": 4,
+      "version": "2026.09.20",
+      "source": "https://huggingface.co/Heliosoph/realesrgan-onnx",
+      "files": [
+        {
+          "name": "realesr-general-x4v3.onnx",
+          "size": 4871181,
+          "sha256": "09b757accd747d7e423c1d352b3e8f23e77cc5742d04bae958d4eb8082b76fa4"
+        },
+        {
+          "name": "realesr-general-x4v3--LICENSE.txt",
+          "size": 1518,
+          "sha256": "171e2afe5fa4eebaed626b4106603b09f8d118ec126a4daec225649aea7eef67"
+        },
+        {
+          "name": "realesr-general-x4v3--provenance.json",
+          "size": 922,
+          "sha256": "1aa3b0933b0c60078b86a119ab6161ef277c01431fcd2bee2d8da6056d5e10a4"
+        }
+      ]
+    },
+    {
+      "id": "realesrgan-anime6b",
+      "label": "Real-ESRGAN 动漫 x4",
+      "scale": 4,
+      "version": "2026.09.20",
+      "source": "https://huggingface.co/RekluzLabs/realesrgan_anime6b.onnx",
+      "files": [
+        {
+          "name": "realesrgan-anime6b.onnx",
+          "size": 18352469,
+          "sha256": "45bd54934aeabe8df744c8fdacb9e8846c9b55cb4e60c499db77405d1625a667"
+        },
+        {
+          "name": "realesrgan-anime6b--LICENSE.txt",
+          "size": 1518,
+          "sha256": "171e2afe5fa4eebaed626b4106603b09f8d118ec126a4daec225649aea7eef67"
+        },
+        {
+          "name": "realesrgan-anime6b--provenance.json",
+          "size": 813,
+          "sha256": "18cdab326f2128d9f63dd923a186bf1908a84782558bc98d1860b03a691c4960"
+        }
+      ]
+    },
+    {
+      "id": "realesrgan-x4plus",
+      "label": "Real-ESRGAN x4plus",
+      "scale": 4,
+      "version": "2026.09.20",
+      "source": "https://huggingface.co/anakhiu/realesrgan-onnx",
+      "files": [
+        {
+          "name": "realesrgan-x4plus.onnx",
+          "size": 67051616,
+          "sha256": "1c0fc21d1d6d7df7f39c1fa23c73138a87a01ea0b3ac56ebd0ea943e62e12800"
+        },
+        {
+          "name": "realesrgan-x4plus--LICENSE.txt",
+          "size": 1518,
+          "sha256": "171e2afe5fa4eebaed626b4106603b09f8d118ec126a4daec225649aea7eef67"
+        },
+        {
+          "name": "realesrgan-x4plus--provenance.json",
+          "size": 773,
+          "sha256": "cb106a2c3ef4d0f999c9bf7c4cab654067992a75be425f1ae8205981ab74d36a"
+        }
+      ]
+    }
+  ]
+}
