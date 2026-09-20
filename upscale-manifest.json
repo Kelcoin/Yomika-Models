@@ -2,6 +2,131 @@
   "tag": "models-v1",
   "models": [
     {
+      "id": "realcugan-2x-conservative",
+      "label": "Real-CUGAN 2x 保守版（推荐）",
+      "scale": 2,
+      "version": "2022.02.27",
+      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
+      "minInputEdge": 20,
+      "files": [
+        {
+          "name": "realcugan-2x-conservative.onnx",
+          "size": 5272599,
+          "sha256": "f90b691f8b835c9058a544a578cbe9b8ed4e538c9721067c98002f2962cf1822"
+        },
+        {
+          "name": "realcugan-2x-conservative--LICENSE.txt",
+          "size": 1065,
+          "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
+        },
+        {
+          "name": "realcugan-2x-conservative--provenance.json",
+          "size": 1377,
+          "sha256": "169129ec58beec0b3250b4069a510e346f6c1af03373f3e53680e2ef31d4dae4"
+        }
+      ]
+    },
+    {
+      "id": "realcugan-2x-no-denoise",
+      "label": "Real-CUGAN 2x 不降噪",
+      "scale": 2,
+      "version": "2022.02.27",
+      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
+      "minInputEdge": 20,
+      "files": [
+        {
+          "name": "realcugan-2x-no-denoise.onnx",
+          "size": 5272599,
+          "sha256": "54a5ea942f3442c42d76bad94c1ca92c988362173ac557ab825f32af45207245"
+        },
+        {
+          "name": "realcugan-2x-no-denoise--LICENSE.txt",
+          "size": 1065,
+          "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
+        },
+        {
+          "name": "realcugan-2x-no-denoise--provenance.json",
+          "size": 1361,
+          "sha256": "e5c83d7aecec2b5118bec4e57b3c03d8f4e04fec420f7446de39571961e3f57e"
+        }
+      ]
+    },
+    {
+      "id": "realcugan-2x-denoise1x",
+      "label": "Real-CUGAN 2x 降噪 1",
+      "scale": 2,
+      "version": "2022.02.27",
+      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
+      "minInputEdge": 20,
+      "files": [
+        {
+          "name": "realcugan-2x-denoise1x.onnx",
+          "size": 5272599,
+          "sha256": "48398b50a283f00e2da7d63fbaec19991000f19e6751fa4c9e13f4a3a33c0f24"
+        },
+        {
+          "name": "realcugan-2x-denoise1x--LICENSE.txt",
+          "size": 1065,
+          "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
+        },
+        {
+          "name": "realcugan-2x-denoise1x--provenance.json",
+          "size": 1358,
+          "sha256": "ba3bdb308e5cb3e506955a20a78e6a98cf13d6b5aba99a9669a0b139ad82cc4f"
+        }
+      ]
+    },
+    {
+      "id": "realcugan-2x-denoise2x",
+      "label": "Real-CUGAN 2x 降噪 2",
+      "scale": 2,
+      "version": "2022.02.27",
+      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
+      "minInputEdge": 20,
+      "files": [
+        {
+          "name": "realcugan-2x-denoise2x.onnx",
+          "size": 5272599,
+          "sha256": "27acbe8617b2601d097478070516f5efb3950d1b51744c10965e012dbba34ec4"
+        },
+        {
+          "name": "realcugan-2x-denoise2x--LICENSE.txt",
+          "size": 1065,
+          "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
+        },
+        {
+          "name": "realcugan-2x-denoise2x--provenance.json",
+          "size": 1358,
+          "sha256": "9157f57774a567b027a29d0040d18a00da8f219a7e82cbf9964b20989eff4f69"
+        }
+      ]
+    },
+    {
+      "id": "realcugan-2x-denoise3x",
+      "label": "Real-CUGAN 2x 降噪 3",
+      "scale": 2,
+      "version": "2022.02.27",
+      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
+      "minInputEdge": 20,
+      "files": [
+        {
+          "name": "realcugan-2x-denoise3x.onnx",
+          "size": 5272599,
+          "sha256": "d1aa4f7b8aa19e66de309294798738e9f590c083673450248157c0c4d8ee8325"
+        },
+        {
+          "name": "realcugan-2x-denoise3x--LICENSE.txt",
+          "size": 1065,
+          "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
+        },
+        {
+          "name": "realcugan-2x-denoise3x--provenance.json",
+          "size": 1358,
+          "sha256": "0157c43865e9ce6a5113d5c5c5a8fb4ad21ce5d09464b76ae5d294ab4e7ce5ee"
+        }
+      ]
+    },
+    {
       "id": "realesr-general-x4v3",
       "label": "Real-ESRGAN 通用 x4",
       "scale": 4,
