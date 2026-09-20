@@ -46,7 +46,12 @@ gh release upload models-v1 <manifest> <平铺文件…> --repo Kelcoin/Yomika-M
 
 ## 超分模型（`upscale-manifest.json`）
 
-公开来源的 Real-ESRGAN ONNX 导出，本仓库只做校验与托管，不做转换。主程序在设置页把它们和已安装的模型一起列出来，点一下就装到 `models/<id>/<version>/`。
+动漫优先走 Real-CUGAN 2x，写实/未知内容走 Real-ESRGAN。两类模型的来源不同：
+
+- **Real-CUGAN**：官方只发 PyTorch `.pth` 与 ncnn，没有 ONNX。这里的 ONNX 是**本项目从官方权重导出**的（权重未经改动），导出方式与逐像素比对记录在各模型的 `--provenance.json` 里。
+- **Real-ESRGAN**：直接用上游发布的 ONNX 导出，本仓库只做校验与托管。
+
+主程序在设置页把它们和已安装的模型一起列出来，点一下就装到 `models/<id>/<version>/`。
 
 清单 schema：
 
@@ -55,18 +60,14 @@ gh release upload models-v1 <manifest> <平铺文件…> --repo Kelcoin/Yomika-M
   "tag": "models-v1",
   "models": [
     {
-      "id": "realesr-general-x4v3",
-      "label": "Real-ESRGAN 通用 x4",
-      "scale": 4,
-      "version": "2026.09.20",
-      "source": "https://huggingface.co/Heliosoph/realesrgan-onnx",
+      "id": "realcugan-2x-conservative",
+      "label": "Real-CUGAN 2x 保守版（推荐）",
+      "scale": 2,
+      "version": "2022.02.27",
+      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
+      "minInputEdge": 20,
       "files": [
-        {
-          "name": "realesr-general-x4v3.onnx",
-          "size": 4871181,
-          "sha256": "…64 位十六进制…",
-          "directUrl": "https://huggingface.co/…/resolve/main/realesr-general-x4v3.onnx"
-        }
+        { "name": "realcugan-2x-conservative.onnx", "size": 5272599, "sha256": "…64 位十六进制…" }
       ]
     }
   ]
@@ -75,16 +76,22 @@ gh release upload models-v1 <manifest> <平铺文件…> --repo Kelcoin/Yomika-M
 
 - `id`：安装目录名，也是 Release 资产的基名（`<id>.onnx`、`<id>--LICENSE.txt`、`<id>--provenance.json`）。目录里必须有且只有一个 ONNX 文件。
 - `scale`：ONNX 输出形状通常是动态的，图自己说不出放大倍数，只能由清单记着。
-- `directUrl`：上游直链，安装时先试它，再试本仓库的 Release 资产与镜像（有人能连 HuggingFace 就省掉这里的带宽）。
+- `minInputEdge`：图能接受的最小边长（源像素）。Real-CUGAN 图内有 18px 反射 pad，每边小于 20 会直接报错，而分块器在页面右边缘会派发 9px 的细条——引擎按这个值把细条补大再裁回。缺省表示图对尺寸没有要求。
+- `directUrl`（Real-ESRGAN 项）：上游直链，安装时先试它，再试本仓库的 Release 资产与镜像。
 - 读取顺序同 `manifest.json`：`raw.githubusercontent.com` 上的本体文件 → 镜像前缀。
 
-| 模型 | 上游来源 | 文件 | 体积 |
+| 模型 | 来源 | 文件 | 体积 |
 |---|---|---|---|
+| `realcugan-2x-conservative` | bilibili/ailab Real-CUGAN（本项目导出） | `realcugan-2x-conservative.onnx` | 5,272,599 |
+| `realcugan-2x-no-denoise` | 同上 | `realcugan-2x-no-denoise.onnx` | 5,272,599 |
+| `realcugan-2x-denoise1x` | 同上 | `realcugan-2x-denoise1x.onnx` | 5,272,599 |
+| `realcugan-2x-denoise2x` | 同上 | `realcugan-2x-denoise2x.onnx` | 5,272,599 |
+| `realcugan-2x-denoise3x` | 同上 | `realcugan-2x-denoise3x.onnx` | 5,272,599 |
 | `realesr-general-x4v3` | Heliosoph/realesrgan-onnx（HuggingFace） | `realesr-general-x4v3.onnx` | 4,871,181 |
 | `realesrgan-anime6b` | RekluzLabs/realesrgan_anime6b.onnx（HuggingFace） | `realesrgan-anime6b.onnx` | 18,352,469 |
 | `realesrgan-x4plus` | anakhiu/realesrgan-onnx（HuggingFace） | `realesrgan-x4plus.onnx` | 67,051,616 |
 
-三者均为 BSD-3-Clause（Real-ESRGAN，Copyright (c) 2021 Xintao Wang），许可全文随包分发为 `<id>--LICENSE.txt`，来源与校验记在 `<id>--provenance.json`。
+Real-CUGAN 为 MIT（Copyright (c) 2022 bilibili）；Real-ESRGAN 三项为 BSD-3-Clause（Real-ESRGAN，Copyright (c) 2021 Xintao Wang）。许可全文随包分发为 `<id>--LICENSE.txt`，来源、导出与校验记在 `<id>--provenance.json`。
 
 ## 当前模型（models-v1）
 
