@@ -3,7 +3,7 @@
   "models": [
     {
       "id": "realcugan-2x-conservative",
-      "label": "Real-CUGAN 2x 保守版（推荐）",
+      "label": "Real-CUGAN 2x 通用（保守版）",
       "scale": 2,
       "version": "2022.02.27",
       "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
@@ -21,89 +21,14 @@
         },
         {
           "name": "realcugan-2x-conservative--provenance.json",
-          "size": 1377,
-          "sha256": "169129ec58beec0b3250b4069a510e346f6c1af03373f3e53680e2ef31d4dae4"
-        }
-      ]
-    },
-    {
-      "id": "realcugan-2x-no-denoise",
-      "label": "Real-CUGAN 2x 不降噪",
-      "scale": 2,
-      "version": "2022.02.27",
-      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
-      "minInputEdge": 20,
-      "files": [
-        {
-          "name": "realcugan-2x-no-denoise.onnx",
-          "size": 5272599,
-          "sha256": "54a5ea942f3442c42d76bad94c1ca92c988362173ac557ab825f32af45207245"
-        },
-        {
-          "name": "realcugan-2x-no-denoise--LICENSE.txt",
-          "size": 1065,
-          "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
-        },
-        {
-          "name": "realcugan-2x-no-denoise--provenance.json",
-          "size": 1361,
-          "sha256": "e5c83d7aecec2b5118bec4e57b3c03d8f4e04fec420f7446de39571961e3f57e"
-        }
-      ]
-    },
-    {
-      "id": "realcugan-2x-denoise1x",
-      "label": "Real-CUGAN 2x 降噪 1",
-      "scale": 2,
-      "version": "2022.02.27",
-      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
-      "minInputEdge": 20,
-      "files": [
-        {
-          "name": "realcugan-2x-denoise1x.onnx",
-          "size": 5272599,
-          "sha256": "48398b50a283f00e2da7d63fbaec19991000f19e6751fa4c9e13f4a3a33c0f24"
-        },
-        {
-          "name": "realcugan-2x-denoise1x--LICENSE.txt",
-          "size": 1065,
-          "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
-        },
-        {
-          "name": "realcugan-2x-denoise1x--provenance.json",
-          "size": 1358,
-          "sha256": "ba3bdb308e5cb3e506955a20a78e6a98cf13d6b5aba99a9669a0b139ad82cc4f"
-        }
-      ]
-    },
-    {
-      "id": "realcugan-2x-denoise2x",
-      "label": "Real-CUGAN 2x 降噪 2",
-      "scale": 2,
-      "version": "2022.02.27",
-      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
-      "minInputEdge": 20,
-      "files": [
-        {
-          "name": "realcugan-2x-denoise2x.onnx",
-          "size": 5272599,
-          "sha256": "27acbe8617b2601d097478070516f5efb3950d1b51744c10965e012dbba34ec4"
-        },
-        {
-          "name": "realcugan-2x-denoise2x--LICENSE.txt",
-          "size": 1065,
-          "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
-        },
-        {
-          "name": "realcugan-2x-denoise2x--provenance.json",
-          "size": 1358,
-          "sha256": "9157f57774a567b027a29d0040d18a00da8f219a7e82cbf9964b20989eff4f69"
+          "size": 1451,
+          "sha256": "dd4dab84a3e3a6b38ca66bae8f7c0b5da986717e724ebbae4da8f5c19e87714f"
         }
       ]
     },
     {
       "id": "realcugan-2x-denoise3x",
-      "label": "Real-CUGAN 2x 降噪 3",
+      "label": "Real-CUGAN 2x 漫画（强降噪）",
       "scale": 2,
       "version": "2022.02.27",
       "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
@@ -121,83 +46,8 @@
         },
         {
           "name": "realcugan-2x-denoise3x--provenance.json",
-          "size": 1358,
-          "sha256": "0157c43865e9ce6a5113d5c5c5a8fb4ad21ce5d09464b76ae5d294ab4e7ce5ee"
-        }
-      ]
-    },
-    {
-      "id": "realesr-general-x4v3",
-      "label": "Real-ESRGAN 通用 x4",
-      "scale": 4,
-      "version": "2026.09.20",
-      "source": "https://huggingface.co/Heliosoph/realesrgan-onnx",
-      "files": [
-        {
-          "name": "realesr-general-x4v3.onnx",
-          "size": 4871181,
-          "sha256": "09b757accd747d7e423c1d352b3e8f23e77cc5742d04bae958d4eb8082b76fa4",
-          "directUrl": "https://huggingface.co/Heliosoph/realesrgan-onnx/resolve/main/realesr-general-x4v3.onnx"
-        },
-        {
-          "name": "realesr-general-x4v3--LICENSE.txt",
-          "size": 1518,
-          "sha256": "171e2afe5fa4eebaed626b4106603b09f8d118ec126a4daec225649aea7eef67"
-        },
-        {
-          "name": "realesr-general-x4v3--provenance.json",
-          "size": 922,
-          "sha256": "1aa3b0933b0c60078b86a119ab6161ef277c01431fcd2bee2d8da6056d5e10a4"
-        }
-      ]
-    },
-    {
-      "id": "realesrgan-anime6b",
-      "label": "Real-ESRGAN 动漫 x4",
-      "scale": 4,
-      "version": "2026.09.20",
-      "source": "https://huggingface.co/RekluzLabs/realesrgan_anime6b.onnx",
-      "files": [
-        {
-          "name": "realesrgan-anime6b.onnx",
-          "size": 18352469,
-          "sha256": "45bd54934aeabe8df744c8fdacb9e8846c9b55cb4e60c499db77405d1625a667",
-          "directUrl": "https://huggingface.co/RekluzLabs/realesrgan_anime6b.onnx/resolve/main/realesrgan_anime6b.onnx"
-        },
-        {
-          "name": "realesrgan-anime6b--LICENSE.txt",
-          "size": 1518,
-          "sha256": "171e2afe5fa4eebaed626b4106603b09f8d118ec126a4daec225649aea7eef67"
-        },
-        {
-          "name": "realesrgan-anime6b--provenance.json",
-          "size": 813,
-          "sha256": "18cdab326f2128d9f63dd923a186bf1908a84782558bc98d1860b03a691c4960"
-        }
-      ]
-    },
-    {
-      "id": "realesrgan-x4plus",
-      "label": "Real-ESRGAN x4plus",
-      "scale": 4,
-      "version": "2026.09.20",
-      "source": "https://huggingface.co/anakhiu/realesrgan-onnx",
-      "files": [
-        {
-          "name": "realesrgan-x4plus.onnx",
-          "size": 67051616,
-          "sha256": "1c0fc21d1d6d7df7f39c1fa23c73138a87a01ea0b3ac56ebd0ea943e62e12800",
-          "directUrl": "https://huggingface.co/anakhiu/realesrgan-onnx/resolve/main/realesrgan_x4plus.onnx"
-        },
-        {
-          "name": "realesrgan-x4plus--LICENSE.txt",
-          "size": 1518,
-          "sha256": "171e2afe5fa4eebaed626b4106603b09f8d118ec126a4daec225649aea7eef67"
-        },
-        {
-          "name": "realesrgan-x4plus--provenance.json",
-          "size": 773,
-          "sha256": "cb106a2c3ef4d0f999c9bf7c4cab654067992a75be425f1ae8205981ab74d36a"
+          "size": 1442,
+          "sha256": "c7093cae67c9a32f251b47fea4780150872aaa0612f42f46bfb936332fff4e78"
         }
       ]
     }
