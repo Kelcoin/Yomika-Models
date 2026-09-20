@@ -5,6 +5,7 @@ Yomika 原生推理模型文件的独立发布仓库。主程序（[Kelcoin/Yomi
 ## 仓库本体
 
 - `manifest.json` — 当前发布清单（tag、资产列表、每个文件的安装路径 / 平铺下载名 / 字节数 / SHA256）。主程序按它下载、校验并安装模型。
+- `upscale-manifest.json` — 超分模型的**可选清单**（见下节）。与上面那份不同：那个是一个整包，所有资产装进同一个目录；这份一条目一个可安装的模型。
 - `README.md` — 本文件。
 
 发布清单的 schema：
@@ -42,6 +43,48 @@ gh release upload models-v1 <manifest> <平铺文件…> --repo Kelcoin/Yomika-M
 ```
 
 上传完成后把 Release 里的 `models-v1.manifest.json` 与本体 `manifest.json` 保持一致。
+
+## 超分模型（`upscale-manifest.json`）
+
+公开来源的 Real-ESRGAN ONNX 导出，本仓库只做校验与托管，不做转换。主程序在设置页把它们和已安装的模型一起列出来，点一下就装到 `models/<id>/<version>/`。
+
+清单 schema：
+
+```json
+{
+  "tag": "models-v1",
+  "models": [
+    {
+      "id": "realesr-general-x4v3",
+      "label": "Real-ESRGAN 通用 x4",
+      "scale": 4,
+      "version": "2026.09.20",
+      "source": "https://huggingface.co/Heliosoph/realesrgan-onnx",
+      "files": [
+        {
+          "name": "realesr-general-x4v3.onnx",
+          "size": 4871181,
+          "sha256": "…64 位十六进制…",
+          "directUrl": "https://huggingface.co/…/resolve/main/realesr-general-x4v3.onnx"
+        }
+      ]
+    }
+  ]
+}
+```
+
+- `id`：安装目录名，也是 Release 资产的基名（`<id>.onnx`、`<id>--LICENSE.txt`、`<id>--provenance.json`）。目录里必须有且只有一个 ONNX 文件。
+- `scale`：ONNX 输出形状通常是动态的，图自己说不出放大倍数，只能由清单记着。
+- `directUrl`：上游直链，安装时先试它，再试本仓库的 Release 资产与镜像（有人能连 HuggingFace 就省掉这里的带宽）。
+- 读取顺序同 `manifest.json`：`raw.githubusercontent.com` 上的本体文件 → 镜像前缀。
+
+| 模型 | 上游来源 | 文件 | 体积 |
+|---|---|---|---|
+| `realesr-general-x4v3` | Heliosoph/realesrgan-onnx（HuggingFace） | `realesr-general-x4v3.onnx` | 4,871,181 |
+| `realesrgan-anime6b` | RekluzLabs/realesrgan_anime6b.onnx（HuggingFace） | `realesrgan-anime6b.onnx` | 18,352,469 |
+| `realesrgan-x4plus` | anakhiu/realesrgan-onnx（HuggingFace） | `realesrgan-x4plus.onnx` | 67,051,616 |
+
+三者均为 BSD-3-Clause（Real-ESRGAN，Copyright (c) 2021 Xintao Wang），许可全文随包分发为 `<id>--LICENSE.txt`，来源与校验记在 `<id>--provenance.json`。
 
 ## 当前模型（models-v1）
 
