@@ -11,7 +11,8 @@
         {
           "name": "realesr-general-x4v3.onnx",
           "size": 4871181,
-          "sha256": "09b757accd747d7e423c1d352b3e8f23e77cc5742d04bae958d4eb8082b76fa4"
+          "sha256": "09b757accd747d7e423c1d352b3e8f23e77cc5742d04bae958d4eb8082b76fa4",
+          "directUrl": "https://huggingface.co/Heliosoph/realesrgan-onnx/resolve/main/realesr-general-x4v3.onnx"
         },
         {
           "name": "realesr-general-x4v3--LICENSE.txt",
@@ -35,7 +36,8 @@
         {
           "name": "realesrgan-anime6b.onnx",
           "size": 18352469,
-          "sha256": "45bd54934aeabe8df744c8fdacb9e8846c9b55cb4e60c499db77405d1625a667"
+          "sha256": "45bd54934aeabe8df744c8fdacb9e8846c9b55cb4e60c499db77405d1625a667",
+          "directUrl": "https://huggingface.co/RekluzLabs/realesrgan_anime6b.onnx/resolve/main/realesrgan_anime6b.onnx"
         },
         {
           "name": "realesrgan-anime6b--LICENSE.txt",
@@ -59,7 +61,8 @@
         {
           "name": "realesrgan-x4plus.onnx",
           "size": 67051616,
-          "sha256": "1c0fc21d1d6d7df7f39c1fa23c73138a87a01ea0b3ac56ebd0ea943e62e12800"
+          "sha256": "1c0fc21d1d6d7df7f39c1fa23c73138a87a01ea0b3ac56ebd0ea943e62e12800",
+          "directUrl": "https://huggingface.co/anakhiu/realesrgan-onnx/resolve/main/realesrgan_x4plus.onnx"
         },
         {
           "name": "realesrgan-x4plus--LICENSE.txt",
