@@ -6,6 +6,7 @@ Yomika 原生推理模型文件的独立发布仓库。主程序（[Kelcoin/Yomi
 
 - `manifest.json` — 当前发布清单（tag、资产列表、每个文件的安装路径 / 平铺下载名 / 字节数 / SHA256）。主程序按它下载、校验并安装模型。
 - `upscale-manifest.json` — 超分模型的**可选清单**（见下节）。与上面那份不同：那个是一个整包，所有资产装进同一个目录；这份一条目一个可安装的模型。
+- `dlssnr-manifest.json` — DLSS5 片段的**可选清单**（见下节）：官方版、社区版、FP16 兼容版各一条，互斥，用户自行挑选。
 - `README.md` — 本文件。
 
 发布清单的 schema：
@@ -43,6 +44,8 @@ gh release upload models-v1 <manifest> <平铺文件…> --repo Kelcoin/Yomika-M
 ```
 
 上传完成后把 Release 里的 `models-v1.manifest.json` 与本体 `manifest.json` 保持一致。
+
+DLSS5 片段（下节三条互斥的变体）同样走这个 Release：上传时保留平铺名 `nvngx_dlssnr--<变体>.dll` 与 `nvidia-dlss-license.txt`，并更新本体 `dlssnr-manifest.json`。
 
 ## 超分模型（`upscale-manifest.json`）
 
@@ -85,6 +88,49 @@ gh release upload models-v1 <manifest> <平铺文件…> --repo Kelcoin/Yomika-M
 | `realcugan-2x-denoise3x` | `up2x-latest-denoise3x.pth` | `realcugan-2x-denoise3x.onnx` | 5,272,599 |
 
 Real-CUGAN 为 MIT（Copyright (c) 2022 bilibili）。许可全文随包分发为 `<id>--LICENSE.txt`，来源、导出与校验记在 `<id>--provenance.json`。
+
+## DLSS5 片段（`dlssnr-manifest.json`）
+
+DLSS5 的片段是 NVIDIA 的 `nvngx_dlssnr.dll`：主程序把一页图交给它做一次同分辨率增强。它**不在**模型目录里，而是装到数据目录下的 `dlssnr/nvngx_dlssnr.dll`——一份按名字固定的文件，同一时刻只能装一种。清单列三条互斥的变体，用哪一条由用户自己挑：
+
+| id | 面向的卡 | 文件版本 | Release 资产 | 体积 |
+|---|---|---|---|---|
+| `official` | RTX 50 系原生 | 310.8.0.0 | `nvngx_dlssnr--official.dll` | 165,840,496 |
+| `community` | RTX 40 / 50 系 | 310.8.0.0 | `nvngx_dlssnr--community-rtx40-50.dll` | 165,840,496 |
+| `sf-v2` | RTX 20 / 30 系（FP16，性能较低） | 310.8.SF.0 | `nvngx_dlssnr--sf-v2.dll` | 165,830,144 |
+
+**分开维护**：官方版与社区版各自一个资产、各自一条清单目，谁都不覆盖谁；FP16 兼容版同样另起一条。资产名里的 `--` 是平铺分隔符（与模型一致）。主程序按 **SHA-256** 认「装的是哪一种」，所以放新版本时**新增**一条（以及新资产名），不要用新字节去顶旧哈希——那样只会让识别失效。
+
+清单 schema：
+
+```json
+{
+  "tag": "models-v1",
+  "license": {
+    "name": "NVIDIA DLSS SDK License",
+    "asset": "nvidia-dlss-license.txt",
+    "size": 26620,
+    "sha256": "…64 位十六进制…"
+  },
+  "variants": [
+    {
+      "id": "official",
+      "label": "NVIDIA 官方原版（RTX 50 系原生）",
+      "note": "…一句话说明这一条是谁用的…",
+      "series": [50],
+      "asset": "nvngx_dlssnr--official.dll",
+      "size": 165840496,
+      "sha256": "…64 位十六进制…"
+    }
+  ]
+}
+```
+
+- `series`：这一条面向哪几代卡。只作说明与设置页的「对你这块卡推荐哪一条」提示。
+- `asset`：Release 资产的平铺文件名。校验通过后落到 `dlssnr/nvngx_dlssnr.dll`。
+- 读取顺序同上：`raw.githubusercontent.com` 上的本体文件 → 镜像前缀。
+
+片段内嵌 NVIDIA 的 DLSS SDK，许可要求随包分发全文：Release 里名为 `nvidia-dlss-license.txt`，清单的 `license` 字段记着它的字节数与 SHA-256。主程序不分发这些字节，只在用户点「下载」时按清单取回并校验。
 
 ## 当前模型（models-v1）
 
