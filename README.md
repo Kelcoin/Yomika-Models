@@ -99,6 +99,8 @@ DLSS5 的片段是 NVIDIA 的 `nvngx_dlssnr.dll`：主程序把一页图交给�
 | `community` | RTX 40 / 50 系 | 310.8.0.0 | `nvngx_dlssnr--community-rtx40-50.dll` | 165,840,496 |
 | `sf-v2` | RTX 20 / 30 系（FP16，性能较低） | 310.8.SF.0 | `nvngx_dlssnr--sf-v2.dll` | 165,830,144 |
 
+这份清单跟着主程序代码走（源文件在 `Kelcoin/Yomika` 的 `src-tauri/resources/dlssnr/dlssnr-manifest.json`），改动要在那边改完再推到这里。
+
 **分开维护**：官方版与社区版各自一个资产、各自一条清单目，谁都不覆盖谁；FP16 兼容版同样另起一条。资产名里的 `--` 是平铺分隔符（与模型一致）。主程序按 **SHA-256** 认「装的是哪一种」，所以放新版本时**新增**一条（以及新资产名），不要用新字节去顶旧哈希——那样只会让识别失效。
 
 清单 schema：
