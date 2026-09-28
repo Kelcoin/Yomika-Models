@@ -1,0 +1,38 @@
+{
+  "tag": "models-v1",
+  "license": {
+    "name": "NVIDIA DLSS SDK License",
+    "asset": "nvidia-dlss-license.txt",
+    "size": 26620,
+    "sha256": "d4216e39ebef5f9b50a6712ebb37beeb5379862a67733a9999c651f21592aaf0"
+  },
+  "variants": [
+    {
+      "id": "official",
+      "label": "NVIDIA 官方原版（RTX 50 系原生）",
+      "note": "NVIDIA 自己发布的这一份，文件版本 310.8.0.0。只在 RTX 50 系上原生支持。",
+      "series": [50],
+      "asset": "nvngx_dlssnr--official.dll",
+      "size": 165840496,
+      "sha256": "e16bcf15e16e13f527491cdf7845b2fe6521a738d8f7c9c721866a8496e1fc8e"
+    },
+    {
+      "id": "community",
+      "label": "社区兼容版（RTX 40 / 50 系）",
+      "note": "社区改出的兼容版，文件版本 310.8.0.0，RTX 40 / 50 系都能跑。",
+      "series": [40, 50],
+      "asset": "nvngx_dlssnr--community-rtx40-50.dll",
+      "size": 165840496,
+      "sha256": "984bee0f775c277d5829b8fd6775d53a7b0f75396c852b3aaf06a18375f81014"
+    },
+    {
+      "id": "sf-v2",
+      "label": "FP16 兼容版（RTX 20 / 30 系，性能较低）",
+      "note": "文件版本 310.8.SF.0，走 FP16。RTX 20 / 30 系可运行，性能较低，主要适合图片与视频。",
+      "series": [20, 30],
+      "asset": "nvngx_dlssnr--sf-v2.dll",
+      "size": 165830144,
+      "sha256": "6eb209e764f39872625debd6abaf45e2bb6322f6f270f781f70c059ae30b3927"
+    }
+  ]
+}
