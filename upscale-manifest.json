@@ -5,14 +5,14 @@
       "id": "realcugan-2x-conservative",
       "label": "Real-CUGAN 2x 通用（保守版）",
       "scale": 2,
-      "version": "2022.02.27",
+      "version": "2022.02.27-dml1",
       "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
       "minInputEdge": 20,
       "files": [
         {
-          "name": "realcugan-2x-conservative.onnx",
-          "size": 5272599,
-          "sha256": "f90b691f8b835c9058a544a578cbe9b8ed4e538c9721067c98002f2962cf1822"
+          "name": "realcugan-2x-conservative-dml1.onnx",
+          "size": 5270956,
+          "sha256": "727f94a02e30bfbeffb9033e9cf8703ebc73757c87ed006095ca2769746e8a5f"
         },
         {
           "name": "realcugan-2x-conservative--LICENSE.txt",
@@ -20,9 +20,9 @@
           "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
         },
         {
-          "name": "realcugan-2x-conservative--provenance.json",
-          "size": 1451,
-          "sha256": "dd4dab84a3e3a6b38ca66bae8f7c0b5da986717e724ebbae4da8f5c19e87714f"
+          "name": "realcugan-2x-conservative-dml1--provenance.json",
+          "size": 3024,
+          "sha256": "84bb65a93aa72eef9a906ee85bded4bdbd9b23c65e2baadcfbcc11f4f971419b"
         }
       ]
     },
@@ -30,14 +30,14 @@
       "id": "realcugan-2x-denoise3x",
       "label": "Real-CUGAN 2x 漫画（强降噪）",
       "scale": 2,
-      "version": "2022.02.27",
+      "version": "2022.02.27-dml1",
       "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
       "minInputEdge": 20,
       "files": [
         {
-          "name": "realcugan-2x-denoise3x.onnx",
-          "size": 5272599,
-          "sha256": "d1aa4f7b8aa19e66de309294798738e9f590c083673450248157c0c4d8ee8325"
+          "name": "realcugan-2x-denoise3x-dml1.onnx",
+          "size": 5270956,
+          "sha256": "931c20fa7e701e118e67602157bfa9fa97f8da0f9a74222ab2e16ea71172a833"
         },
         {
           "name": "realcugan-2x-denoise3x--LICENSE.txt",
@@ -45,9 +45,9 @@
           "sha256": "8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba"
         },
         {
-          "name": "realcugan-2x-denoise3x--provenance.json",
-          "size": 1442,
-          "sha256": "c7093cae67c9a32f251b47fea4780150872aaa0612f42f46bfb936332fff4e78"
+          "name": "realcugan-2x-denoise3x-dml1--provenance.json",
+          "size": 3015,
+          "sha256": "27676fd66169f0ededf714aea0cd44ab0490b9a6ad5a87f51eea65ab8e190576"
         }
       ]
     }
