@@ -1,148 +1,147 @@
 # Yomika Models
 
-Yomika 原生推理模型文件的独立发布仓库。主程序（[Kelcoin/Yomika](https://github.com/Kelcoin/Yomika)）本体不携带大模型文件；这里以 GitHub Release 分发模型包，仓库本体只维护说明与发布清单。
+Yomika 原生推理模型文件的独立发布仓库。主程序（[Kelcoin/Yomika](https://github.com/Kelcoin/Yomika)）本体不携带大模型文件；模型包以 GitHub Release 分发，标签固定为 `models-v1`。仓库本体只维护这份发布说明与两份清单，不存放模型文件本身。
 
 ## 仓库本体
 
-- `manifest.json` — 当前发布清单（tag、资产列表、每个文件的安装路径 / 平铺下载名 / 字节数 / SHA256）。主程序按它下载、校验并安装模型。
-- `upscale-manifest.json` — 超分模型的**可选清单**（见下节）。与上面那份不同：那个是一个整包，所有资产装进同一个目录；这份一条目一个可安装的模型。
-- `dlssnr-manifest.json` — DLSS5 片段的**可选清单**（见下节）：官方版、社区版、FP16 兼容版各一条，互斥，用户自行挑选。
-- `README.md` — 本文件。
+- `upscale-manifest.json`：超分模型清单。主程序按它列出可在线下载的超分模型，逐文件校验后装进 `models/<id>/<version>/`。
+- `dlssnr-manifest.json`：DLSSNR 片段清单。主程序按它列出可下载的片段变体，校验后把选中的那一份装成数据目录下的 `dlssnr/nvngx_dlssnr.dll`。
+- `README.md`：本文件。
 
-发布清单的 schema：
+主程序读取清单的顺序：`raw.githubusercontent.com` 上的仓库正文原始文件 → 依次套用镜像前缀（`gh-proxy.com`、`ghfast.top`、`ghproxy.net`）。清单里的 `tag` 决定模型资产从哪个 Release 取；资产下载同样先直连、再逐个镜像，并且落盘的字节必须与清单里的 `size` / `sha256` 完全一致，对不上就不安装。清单以仓库正文那一份为准；如果另外把副本挂进了 Release，那份副本必须与正文逐字节一致（主程序不读这份副本）。
 
-```json
-{
-  "tag": "models-v1",
-  "assets": [
-    {
-      "role": "detector | inpainting | upscaler | license",
-      "path": "mrcnn/weights.onnx",
-      "downloadName": "mrcnn--weights.onnx",
-      "size": 133568682,
-      "sha256": "…64 位十六进制…",
-      "companions": []
-    }
-  ]
-}
-```
-
-- `path`：安装进模型目录后的相对路径（用 `/` 分隔）。
-- `downloadName`：Release 资产的平铺文件名（GitHub Release 保留文件名但不保留目录）。
-- 主程序读取清单的顺序：`raw.githubusercontent.com` 上的本体 `manifest.json` → 优先镜像前缀 → Release 资产 `models-v1.manifest.json` → 各种镜像。
-
-## 发布流程
-
-模型源文件（GPL-3.0 Aletheia-Lens 去码包等）保留在主仓库的本地 `docs/` 目录，不入库。发布：
-
-```powershell
-# 在主仓库根目录：生成清单（默认 models-fp16）并复制平铺文件
-./tools/models/release-manifest.ps1 -Tag models-v1
-# 更新本仓库的 manifest.json 后，创建 Release 并上传：
-gh release create models-v1 --repo Kelcoin/Yomika-Models --title "…" --notes "…"
-gh release upload models-v1 <manifest> <平铺文件…> --repo Kelcoin/Yomika-Models --clobber
-```
-
-上传完成后把 Release 里的 `models-v1.manifest.json` 与本体 `manifest.json` 保持一致。
-
-DLSS5 片段（下节三条互斥的变体）同样走这个 Release：上传时保留平铺名 `nvngx_dlssnr--<变体>.dll` 与 `nvidia-dlss-license.txt`，并更新本体 `dlssnr-manifest.json`。
-
-## 超分模型（`upscale-manifest.json`）
-
-漫画走 Real-CUGAN 2x，两项可选：**通用（保守版）** 不改线稿、**漫画（强降噪）** 清噪点与网点。这两项来自官方 2x 的**降噪强度**档位（官方那五档是降噪轴，不是内容轴——五个权重同一套训练集）：通用对应 `conservative`，漫画对应 `denoise3x`。
-
-官方只发 PyTorch `.pth` 与 ncnn、没有 ONNX，所以这里的 ONNX 是**本项目从官方权重导出**的（权重未经改动），导出方式与逐像素比对记录在各模型的 `--provenance.json` 里。主程序在设置页把它们和已安装的模型一起列出来，点一下装到 `models/<id>/<version>/`。
-
-（此前的 Real-ESRGAN 三项已从清单下线。）
-
-清单 schema：
+### `upscale-manifest.json` 的字段
 
 ```json
 {
   "tag": "models-v1",
   "models": [
     {
-      "id": "realcugan-2x-conservative",
-      "label": "Real-CUGAN 2x 通用（保守版）",
+      "id": "…",
+      "label": "设置页显示的名字",
       "scale": 2,
-      "version": "2022.02.27",
-      "source": "https://github.com/bilibili/ailab/tree/main/Real-CUGAN",
+      "version": "…",
+      "source": "上游出处，只作记录",
       "minInputEdge": 20,
       "files": [
-        { "name": "realcugan-2x-conservative.onnx", "size": 5272599, "sha256": "…64 位十六进制…" }
+        { "name": "…", "size": 0, "sha256": "…64 位十六进制…" }
       ]
     }
   ]
 }
 ```
 
-- `id`：安装目录名，也是 Release 资产的基名（`<id>.onnx`、`<id>--LICENSE.txt`、`<id>--provenance.json`）。目录里必须有且只有一个 ONNX 文件。
-- `scale`：ONNX 输出形状通常是动态的，图自己说不出放大倍数，只能由清单记着。
-- `minInputEdge`：图能接受的最小边长（源像素）。Real-CUGAN 图内有 18px 反射 pad，每边小于 20 会直接报错，而分块器在页面右边缘会派发 9px 的细条——引擎按这个值把细条补大再裁回。
-- `directUrl`（可选）：上游直链，安装时先试它，再试本仓库的 Release 资产与镜像。当前两项都在本仓库，用不到。
-- 读取顺序同 `manifest.json`：`raw.githubusercontent.com` 上的本体文件 → 镜像前缀。
+- `tag`、`models` 必填，`models` 不能为空。
+- `id`：同时是安装目录名；`version` 也是目录名的一部分。两者都必须是安全的单段路径。
+- `label`、`scale`：设置页显示用；`scale` 会写进安装后的 `yomika-model.json`。ONNX 的输出形状是动态的，从文件本身问不出放大倍数，所以只能写在清单里。
+- `source`、`minInputEdge`、`files[].directUrl`：可选。`directUrl` 是上游直链，必须先于本仓库的 Release 资产尝试；`minInputEdge` 是图能接受的最小输入边长。
+- `files[].name`：既是安装进模型目录的文件名，也是 Release 资产的平铺文件名；`size` 必须大于 0，`sha256` 必须是 64 位十六进制。
+- 一个模型必须且只能列出 1 份 `.onnx` 图，同一模型内的文件名不得重复。
 
-| 模型 | 对应官方档位 | 文件 | 体积 |
-|---|---|---|---|
-| `realcugan-2x-conservative` | `up2x-latest-conservative.pth` | `realcugan-2x-conservative.onnx` | 5,272,599 |
-| `realcugan-2x-denoise3x` | `up2x-latest-denoise3x.pth` | `realcugan-2x-denoise3x.onnx` | 5,272,599 |
-
-Real-CUGAN 为 MIT（Copyright (c) 2022 bilibili）。许可全文随包分发为 `<id>--LICENSE.txt`，来源、导出与校验记在 `<id>--provenance.json`。
-
-## DLSS5 片段（`dlssnr-manifest.json`）
-
-DLSS5 的片段是 NVIDIA 的 `nvngx_dlssnr.dll`：主程序把一页图交给它做一次同分辨率增强。它**不在**模型目录里，而是装到数据目录下的 `dlssnr/nvngx_dlssnr.dll`——一份按名字固定的文件，同一时刻只能装一种。清单列三条互斥的变体，用哪一条由用户自己挑：
-
-| id | 面向的卡 | 文件版本 | Release 资产 | 体积 |
-|---|---|---|---|---|
-| `official` | RTX 50 系原生 | 310.8.0.0 | `nvngx_dlssnr--official.dll` | 165,840,496 |
-| `community` | RTX 40 / 50 系 | 310.8.0.0 | `nvngx_dlssnr--community-rtx40-50.dll` | 165,840,496 |
-| `sf-v2` | RTX 20 / 30 系（FP16，性能较低） | 310.8.SF.0 | `nvngx_dlssnr--sf-v2.dll` | 165,830,144 |
-
-这份清单跟着主程序代码走（源文件在 `Kelcoin/Yomika` 的 `src-tauri/resources/dlssnr/dlssnr-manifest.json`），改动要在那边改完再推到这里。
-
-**分开维护**：官方版与社区版各自一个资产、各自一条清单目，谁都不覆盖谁；FP16 兼容版同样另起一条。资产名里的 `--` 是平铺分隔符（与模型一致）。主程序按 **SHA-256** 认「装的是哪一种」，所以放新版本时**新增**一条（以及新资产名），不要用新字节去顶旧哈希——那样只会让识别失效。
-
-清单 schema：
+### `dlssnr-manifest.json` 的字段
 
 ```json
 {
   "tag": "models-v1",
-  "license": {
-    "name": "NVIDIA DLSS SDK License",
-    "asset": "nvidia-dlss-license.txt",
-    "size": 26620,
-    "sha256": "…64 位十六进制…"
-  },
+  "license": { "name": "…", "asset": "…", "size": 0, "sha256": "…" },
   "variants": [
     {
-      "id": "official",
-      "label": "NVIDIA 官方原版（RTX 50 系原生）",
-      "note": "…一句话说明这一条是谁用的…",
+      "id": "…",
+      "label": "…",
+      "note": "…",
       "series": [50],
-      "asset": "nvngx_dlssnr--official.dll",
-      "size": 165840496,
-      "sha256": "…64 位十六进制…"
+      "asset": "…",
+      "size": 0,
+      "sha256": "…"
     }
   ]
 }
 ```
 
-- `series`：这一条面向哪几代卡。只作说明与设置页的「对你这块卡推荐哪一条」提示。
-- `asset`：Release 资产的平铺文件名。校验通过后落到 `dlssnr/nvngx_dlssnr.dll`。
-- 读取顺序同上：`raw.githubusercontent.com` 上的本体文件 → 镜像前缀。
+- `tag`、`variants` 必填，`variants` 不能为空。
+- `variants[].id`：变体标识（`official` / `community` / `sf-v2`），不得重复；`label` 不能为空。
+- `variants[].asset`：Release 资产的平铺文件名，下载时也当落盘名用，必须是安全的单段路径。
+- `variants[].note`、`variants[].series`：只作说明与推荐提示，`series` 写这一条面向哪几代卡。
+- `license`：可选。片段内嵌的厂商许可里要求随包分发全文的那一份，字段与变体一致（`name` / `asset` / `size` / `sha256`）。
 
-片段内嵌 NVIDIA 的 DLSS SDK，许可要求随包分发全文：Release 里名为 `nvidia-dlss-license.txt`，清单的 `license` 字段记着它的字节数与 SHA-256。主程序不分发这些字节，只在用户点「下载」时按清单取回并校验。
+## 当前发布内容（models-v1）
 
-## 当前模型（models-v1）
+### 超分模型（`upscale-manifest.json`）
 
-Aletheia-Lens 去码包（四组件齐备才算完整）：
+两个模型都取自 bilibili/ailab 的 Real-CUGAN（`https://github.com/bilibili/ailab/tree/main/Real-CUGAN`），版本 `2022.02.27-dml1`，每套三件：ONNX 图、许可全文、DML 改写记录。
 
-| role | 安装路径 | 来源 |
-|---|---|---|
-| detector | `mrcnn/weights.onnx` | Aletheia-Lens（FP16 检测器，主仓库转换脚本减半） |
-| inpainting | `deepcreampy/bar.onnx`、`deepcreampy/mosaic.onnx` | DeepCreamPy ONNX 导出 |
-| upscaler | `esrgan/4x-Fatal-Pixels.onnx`（+`.data` 外部数据） | Aletheia-Lens |
-| license | `LICENSE` | Aletheia-Lens GPL-3.0 全文 |
+| 模型 | 说明 | 文件（= 平铺下载名） | 字节数 | SHA256 |
+|---|---|---|---|---|
+| `realcugan-2x-conservative` | Real-CUGAN 2x 通用（保守版） | `realcugan-2x-conservative-dml1.onnx` | 5270956 | `727f94a02e30bfbeffb9033e9cf8703ebc73757c87ed006095ca2769746e8a5f` |
+| `realcugan-2x-conservative` | 许可全文 | `realcugan-2x-conservative--LICENSE.txt` | 1065 | `8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba` |
+| `realcugan-2x-conservative` | DML 改写记录 | `realcugan-2x-conservative-dml1--provenance.json` | 3024 | `84bb65a93aa72eef9a906ee85bded4bdbd9b23c65e2baadcfbcc11f4f971419b` |
+| `realcugan-2x-denoise3x` | Real-CUGAN 2x 漫画（强降噪） | `realcugan-2x-denoise3x-dml1.onnx` | 5270956 | `931c20fa7e701e118e67602157bfa9fa97f8da0f9a74222ab2e16ea71172a833` |
+| `realcugan-2x-denoise3x` | 许可全文 | `realcugan-2x-denoise3x--LICENSE.txt` | 1065 | `8cad8cfdf94baaf23519061af913770e52476ddec2a311e9510582e7bed13cba` |
+| `realcugan-2x-denoise3x` | DML 改写记录 | `realcugan-2x-denoise3x-dml1--provenance.json` | 3015 | `27676fd66169f0ededf714aea0cd44ab0490b9a6ad5a87f51eea65ab8e190576` |
 
-许可证：Aletheia-Lens 为 GPL-3.0，清单附带其全文；模型文件随包分发。waifu2x-upconv7（MIT）内置于主程序，不经本仓库分发。
+### DLSSNR 片段（`dlssnr-manifest.json`）
+
+文件版本都是 310.8.0.0 一系；下载后落到数据目录的 `dlssnr/nvngx_dlssnr.dll`。
+
+| 变体 | 说明 | 文件（= 平铺下载名） | 字节数 | SHA256 |
+|---|---|---|---|---|
+| `official` | NVIDIA 官方原版（RTX 50 系原生） | `nvngx_dlssnr--official.dll` | 165840496 | `e16bcf15e16e13f527491cdf7845b2fe6521a738d8f7c9c721866a8496e1fc8e` |
+| `community` | 社区兼容版（RTX 40 / 50 系） | `nvngx_dlssnr--community-rtx40-50.dll` | 165840496 | `984bee0f775c277d5829b8fd6775d53a7b0f75396c852b3aaf06a18375f81014` |
+| `sf-v2` | FP16 兼容版（RTX 20 / 30 系，性能较低） | `nvngx_dlssnr--sf-v2.dll` | 165830144 | `6eb209e764f39872625debd6abaf45e2bb6322f6f270f781f70c059ae30b3927` |
+| 许可 | NVIDIA DLSS SDK License | `nvidia-dlss-license.txt` | 26620 | `d4216e39ebef5f9b50a6712ebb37beeb5379862a67733a9999c651f21592aaf0` |
+
+## 刻意不在这里的内容
+
+- waifu2x-upconv7（MIT）：内置于主程序，不经本仓库分发。
+- Anime4K：是编译进主程序的着色器链，不是模型文件，清单里没有它。
+- 去码整档：Aletheia-Lens 去码包已于 2026-10-14 随该功能下线退役，不再发布；它原先那份打包清单也已从本仓库删除。
+
+## 发布流程
+
+### 源头
+
+超分模型与它们的两份记录放在主仓库的 `docs/models/`（本地工作目录，不进主仓库提交），超分清单以 `docs/models/upscale-manifest.json` 为准。DLSSNR 清单以主仓库 `src-tauri/resources/dlssnr/dlssnr-manifest.json` 为准，它同时被主程序用 `include_str!` 编成内置副本，改这里等于改主程序。DLSSNR 的三份片段二进制在主仓库 `docs/DLSSNR-DLL-Options-310.8.0.0/`，NVIDIA 许可正本在 `src-tauri/vendor/ngx/NVIDIA-DLSS-LICENSE.txt`。
+
+### 平铺下载名
+
+GitHub Release 保留文件名，不保留目录，所以每份资产在 Release 里都必须是平铺且唯一的名字：
+
+- 超分：清单 `files[].name` 本身就是平铺名，例如 `realcugan-2x-conservative-dml1.onnx`、`realcugan-2x-conservative--LICENSE.txt`。清单没有单独的 `downloadName` 字段，名字一开始就要取平铺形式，`--` 只用来把模型名与记录类型分开。
+- DLSSNR：清单 `variants[].asset` 与 `license.asset` 就是平铺名，`--` 把原名与变体名分开。
+
+### 命令
+
+```powershell
+# 1. 两份清单以主仓库为准，同步到本仓库正文（逐字节一致），然后提交到 main：
+#    主仓库 docs\models\upscale-manifest.json                 -> 本仓库 upscale-manifest.json
+#    主仓库 src-tauri\resources\dlssnr\dlssnr-manifest.json    -> 本仓库 dlssnr-manifest.json
+
+# 2. 创建 Release（已存在时跳过这一步）
+gh release create models-v1 --repo Kelcoin/Yomika-Models `
+  --title "Yomika 模型包 models-v1" `
+  --notes "Yomika 超分模型与 DLSSNR 片段"
+
+# 3. 上传当前全部平铺资产（在放平铺文件的目录里执行，文件名必须与上表一致）
+gh release upload models-v1 --repo Kelcoin/Yomika-Models --clobber `
+  realcugan-2x-conservative-dml1.onnx `
+  realcugan-2x-conservative--LICENSE.txt `
+  realcugan-2x-conservative-dml1--provenance.json `
+  realcugan-2x-denoise3x-dml1.onnx `
+  realcugan-2x-denoise3x--LICENSE.txt `
+  realcugan-2x-denoise3x-dml1--provenance.json `
+  nvngx_dlssnr--official.dll `
+  nvngx_dlssnr--community-rtx40-50.dll `
+  nvngx_dlssnr--sf-v2.dll `
+  nvidia-dlss-license.txt
+```
+
+### 发布后自检
+
+```powershell
+# 每个资产算一遍 SHA256，逐条与清单对
+Get-FileHash -Algorithm SHA256 .\realcugan-2x-conservative-dml1.onnx
+# Release 里的资产名与数量
+gh release view models-v1 --repo Kelcoin/Yomika-Models
+```
+
+许可证：Real-CUGAN 的许可见各模型目录下的 `--LICENSE.txt`，随包分发；DLSSNR 片段内嵌 NVIDIA DLSS SDK 许可，全文以 `nvidia-dlss-license.txt` 随包分发。waifu2x-upconv7（MIT）内置于主程序，不经本仓库分发。

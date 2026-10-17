@@ -27,7 +27,7 @@
     },
     {
       "id": "sf-v2",
-      "label": "FP16 兼容版（RTX 20 / 30 系，性能较低）",
+      "label": "FP16 兼容版（RTX 20 / 30 系）",
       "note": "文件版本 310.8.SF.0，走 FP16。RTX 20 / 30 系可运行，性能较低，主要适合图片与视频。",
       "series": [20, 30],
       "asset": "nvngx_dlssnr--sf-v2.dll",
