@@ -81,13 +81,13 @@ Yomika 原生推理模型文件的独立发布仓库。主程序（[Kelcoin/Yomi
 
 ### DLSSNR 片段（`dlssnr-manifest.json`）
 
-文件版本都是 310.8.0.0 一系；下载后落到数据目录的 `dlssnr/nvngx_dlssnr.dll`。
+三份的文件版本各不相同：官方 310.8.0.0（签名有效）、社区 310.8.3.0（Lecram 改写，签名哈希对不上）、FP16 310.9.16.0（社区 compat-fp16，未签名）。下载后落到数据目录的 `dlssnr/nvngx_dlssnr.dll`。
 
 | 变体 | 说明 | 文件（= 平铺下载名） | 字节数 | SHA256 |
 |---|---|---|---|---|
 | `official` | NVIDIA 官方原版（RTX 50 系原生） | `nvngx_dlssnr--official.dll` | 165840496 | `e16bcf15e16e13f527491cdf7845b2fe6521a738d8f7c9c721866a8496e1fc8e` |
-| `community` | 社区兼容版（RTX 40 / 50 系） | `nvngx_dlssnr--community-rtx40-50.dll` | 165840496 | `984bee0f775c277d5829b8fd6775d53a7b0f75396c852b3aaf06a18375f81014` |
-| `sf-v2` | FP16 兼容版（RTX 20 / 30 系，性能较低） | `nvngx_dlssnr--sf-v2.dll` | 165830144 | `6eb209e764f39872625debd6abaf45e2bb6322f6f270f781f70c059ae30b3927` |
+| `community` | 社区兼容版（RTX 40 / 50 系，Lecram 310.8.3） | `nvngx_dlssnr--community-rtx40-50.dll` | 165840496 | `f95feb54137ea11979f9b4ec4f00afd84b5c98a5624d3388fbf6a87714a39fcc` |
+| `sf-v2` | FP16 兼容版（RTX 20 / 30 系，社区 compat-fp16 310.9.16） | `nvngx_dlssnr--sf-v2.dll` | 276162560 | `cdfa6c1ec784867182164c7836f324f087b5c9f374d0c9fe46f54999feabf3ed` |
 | 许可 | NVIDIA DLSS SDK License | `nvidia-dlss-license.txt` | 26620 | `d4216e39ebef5f9b50a6712ebb37beeb5379862a67733a9999c651f21592aaf0` |
 
 ## 刻意不在这里的内容

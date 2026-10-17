@@ -9,8 +9,8 @@
   "variants": [
     {
       "id": "official",
-      "label": "NVIDIA 官方原版（RTX 50 系原生）",
-      "note": "NVIDIA 自己发布的这一份，文件版本 310.8.0.0。只在 RTX 50 系上原生支持。",
+      "label": "官方原版",
+      "note": "NVIDIA 自己发布的这一份，文件版本 310.8.0.0，签名有效。只在 RTX 50 系上原生支持。",
       "series": [50],
       "asset": "nvngx_dlssnr--official.dll",
       "size": 165840496,
@@ -18,21 +18,21 @@
     },
     {
       "id": "community",
-      "label": "社区兼容版（RTX 40 / 50 系）",
-      "note": "社区改出的兼容版，文件版本 310.8.0.0，RTX 40 / 50 系都能跑。",
+      "label": "社区兼容版",
+      "note": "社区改出的 Lecram 版，文件版本 310.8.3.0（签名哈希对不上，属改过的片段）。RTX 40 / 50 系都能跑。",
       "series": [40, 50],
       "asset": "nvngx_dlssnr--community-rtx40-50.dll",
       "size": 165840496,
-      "sha256": "984bee0f775c277d5829b8fd6775d53a7b0f75396c852b3aaf06a18375f81014"
+      "sha256": "f95feb54137ea11979f9b4ec4f00afd84b5c98a5624d3388fbf6a87714a39fcc"
     },
     {
       "id": "sf-v2",
-      "label": "FP16 兼容版（RTX 20 / 30 系）",
-      "note": "文件版本 310.8.SF.0，走 FP16。RTX 20 / 30 系可运行，性能较低，主要适合图片与视频。",
+      "label": "FP16 兼容版",
+      "note": "社区 compat-fp16 构建（面向 Ampere 及更早的卡），文件版本 310.9.16.0，未签名。RTX 20 / 30 系可运行，主要适合图片与视频。",
       "series": [20, 30],
       "asset": "nvngx_dlssnr--sf-v2.dll",
-      "size": 165830144,
-      "sha256": "6eb209e764f39872625debd6abaf45e2bb6322f6f270f781f70c059ae30b3927"
+      "size": 276162560,
+      "sha256": "cdfa6c1ec784867182164c7836f324f087b5c9f374d0c9fe46f54999feabf3ed"
     }
   ]
 }
