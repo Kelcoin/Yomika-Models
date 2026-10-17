@@ -18,8 +18,8 @@
     },
     {
       "id": "community",
-      "label": "社区兼容版",
-      "note": "社区改出的 Lecram 版，文件版本 310.8.3.0（签名哈希对不上，属改过的片段）。RTX 40 / 50 系都能跑。",
+      "label": "Lecram 版",
+      "note": "社区改出的 Lecram 构建，文件版本 310.8.3.0（签名哈希对不上，属改过的片段）。RTX 40 / 50 系都能跑。",
       "series": [40, 50],
       "asset": "nvngx_dlssnr--community-rtx40-50.dll",
       "size": 165840496,
@@ -27,9 +27,9 @@
     },
     {
       "id": "sf-v2",
-      "label": "FP16 兼容版",
-      "note": "社区 compat-fp16 构建（面向 Ampere 及更早的卡），文件版本 310.9.16.0，未签名。RTX 20 / 30 系可运行，主要适合图片与视频。",
-      "series": [20, 30],
+      "label": "SF 版",
+      "note": "社区 compat-fp16 构建，文件版本 310.9.16.0，未签名。作者声明 SM75/86/89 + SM120 兼容，RTX 20 / 30 / 40 / 50 系都可运行；主要适合图片与视频。",
+      "series": [20, 30, 40, 50],
       "asset": "nvngx_dlssnr--sf-v2.dll",
       "size": 276162560,
       "sha256": "cdfa6c1ec784867182164c7836f324f087b5c9f374d0c9fe46f54999feabf3ed"
